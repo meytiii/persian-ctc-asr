@@ -8,6 +8,7 @@ from tensorflow.keras.layers import Input, LSTM, Dense, Masking, TimeDistributed
 from sklearn.model_selection import train_test_split
 from tensorflow.keras.callbacks import EarlyStopping, ModelCheckpoint
 import gdown
+import matplotlib.pyplot as plt
 
 # Function to download files from Google Drive
 def download_file_from_google_drive(file_id, dest_path):
@@ -219,14 +220,29 @@ validation_steps = len(X_val) // 16
 early_stopping = EarlyStopping(monitor='val_loss', patience=5, restore_best_weights=True)
 model_checkpoint = ModelCheckpoint('/content/asr_best_model.keras', monitor='val_loss', save_best_only=True)
 
-# Train the model
-model.fit(train_gen, steps_per_epoch=steps_per_epoch, epochs=30, validation_data=val_gen, validation_steps=validation_steps, callbacks=[early_stopping, model_checkpoint])
+# Train the model and save the history
+history = model.fit(train_gen, steps_per_epoch=steps_per_epoch, epochs=30, validation_data=val_gen, validation_steps=validation_steps, callbacks=[early_stopping, model_checkpoint])
 
 # Save the final model
 model.save('/content/asr_model.keras')
 
 # Model summary
 model.summary()
+
+# Plotting the training history
+def plot_training_history(history):
+    plt.figure(figsize=(10, 6))
+    plt.plot(history.history['loss'], label='Training Loss')
+    plt.plot(history.history['val_loss'], label='Validation Loss')
+    plt.xlabel('Epochs')
+    plt.ylabel('Loss')
+    plt.title('Training and Validation Loss Over Epochs')
+    plt.legend()
+    plt.grid(True)
+    plt.show()
+
+# Plot the training history
+plot_training_history(history)
 
 # Redefine the inference model
 inference_model = Model(inputs=input_data, outputs=y_pred)
