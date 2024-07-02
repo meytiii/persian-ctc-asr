@@ -93,7 +93,7 @@ The model is evaluated based on the accuracy of the transcriptions. While the mo
 
 Example Output:
 
--   Predicted text: تفاقات که ندید بود
+-   Predicted text: تفاقات که ندید بد
 -   Actual text: اتفاقاتی که ندیده بودم
 
 ## Conclusion
