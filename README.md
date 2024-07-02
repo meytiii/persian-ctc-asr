@@ -115,7 +115,7 @@ This project demonstrates the process of building an ASR system for the Persian 
 
 ## Acknowledgments
 
-This project is inspired by various works in the field of speech recognition and deep learning. Special thanks to the creators of the datasets and tools used in this project.
+This project is inspired by various works in the field of speech recognition and deep learning. Special thanks to the creators of the datasets and tools used in this project. Special thanks to Hamtech for providing and cleaning the dataset. ( https://ham-tech.ir/ )
 
 ## How to Run the Project
 
